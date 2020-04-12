@@ -54,18 +54,11 @@ export default class ProcessoService extends ApiService {
             erros.push("Informe o Mês.")
         }
 
-        if(!processo.descricao){
+        if(!processo.parecer){
             erros.push("Informe a Descrição.")
         }
 
-        if(!processo.valor){
-            erros.push("Informe o Valor.")
-        }
-
-        if(!processo.tipo){
-            erros.push("Informe o Tipo.")
-        }
-
+    
         if(erros && erros.length > 0){
             throw new ErroValidacao(erros);
         }
@@ -86,10 +79,6 @@ export default class ProcessoService extends ApiService {
             params = `${params}&mes=${processoFiltro.mes}`
         }
 
-        if(processoFiltro.tipo){
-            params = `${params}&tipo=${processoFiltro.tipo}`
-        }
-
         if(processoFiltro.status){
             params = `${params}&status=${processoFiltro.status}`
         }
@@ -98,8 +87,8 @@ export default class ProcessoService extends ApiService {
             params = `${params}&usuario=${processoFiltro.usuario}`
         }
 
-        if(processoFiltro.descricao){
-            params = `${params}&descricao=${processoFiltro.descricao}`
+        if(processoFiltro.parecer){
+            params = `${params}&parecer=${processoFiltro.parecer}`
         }
 
         return this.get(params);

@@ -12,9 +12,6 @@ class UsuarioService extends ApiService {
         return this.post('/autenticar', credenciais)
     }
 
-    obterSaldoPorUsuario(id){
-        return this.get(`/${id}/saldo`);
-    }
 
     salvar(usuario){
         return this.post('/', usuario);

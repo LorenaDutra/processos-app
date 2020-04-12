@@ -20,8 +20,7 @@ class ConsultaProcessos extends React.Component {
     state = {
         ano: '',
         mes: '',
-        tipo: '',
-        descricao: '',
+        parecer: '',
         showConfirmDialog: false,
         processoDeletar: {},
         processos : []
@@ -43,8 +42,7 @@ class ConsultaProcessos extends React.Component {
         const processoFiltro = {
             ano: this.state.ano,
             mes: this.state.mes,
-            tipo: this.state.tipo,
-            descricao: this.state.descricao,
+            parecer: this.state.parecer,
             usuario: usuarioLogado.id
         }
 
@@ -82,9 +80,9 @@ class ConsultaProcessos extends React.Component {
                 const index = processos.indexOf(this.state.processoDeletar)
                 processos.splice(index, 1);
                 this.setState( { processos: processos, showConfirmDialog: false } )
-                messages.mensagemSucesso('Lançamento deletado com sucesso!')
+                messages.mensagemSucesso('Processo deletado com sucesso!')
             }).catch(error => {
-                messages.mensagemErro('Ocorreu um erro ao tentar deletar o Lançamento')
+                messages.mensagemErro('Ocorreu um erro ao tentar deletar o Processo')
             })
     }
 
@@ -109,7 +107,7 @@ class ConsultaProcessos extends React.Component {
 
     render(){
         const meses = this.service.obterListaMeses();
-        const tipos = this.service.obterListaTipos();
+        
 
         const confirmDialogFooter = (
             <div>
@@ -120,7 +118,7 @@ class ConsultaProcessos extends React.Component {
         );
 
         return (
-            <Card title="Consulta Lançamentos">
+            <Card title="Consulta Processos">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="bs-component">
@@ -145,18 +143,12 @@ class ConsultaProcessos extends React.Component {
                                 <input type="text" 
                                        className="form-control" 
                                        id="inputDesc" 
-                                       value={this.state.descricao}
-                                       onChange={e => this.setState({descricao: e.target.value})}
+                                       value={this.state.parecer}
+                                       onChange={e => this.setState({parecer: e.target.value})}
                                        placeholder="Digite a descrição" />
                             </FormGroup>
 
-                            <FormGroup htmlFor="inputTipo" label="Tipo Lançamento: ">
-                                <SelectMenu id="inputTipo" 
-                                            value={this.state.tipo}
-                                            onChange={e => this.setState({ tipo: e.target.value })}
-                                            className="form-control" 
-                                            lista={tipos} />
-                            </FormGroup>
+                           
 
                             <button onClick={this.buscar} 
                                     type="button" 
@@ -191,7 +183,7 @@ class ConsultaProcessos extends React.Component {
                             footer={confirmDialogFooter} 
                             modal={true} 
                             onHide={() => this.setState({showConfirmDialog: false})}>
-                        Confirma a exclusão deste Lançamento?
+                        Confirma a exclusão deste Processo?
                     </Dialog>
                 </div>           
             </Card>

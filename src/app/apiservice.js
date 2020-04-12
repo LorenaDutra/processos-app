@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 export const httpClient = axios.create({
-    baseURL: 'https://processos-api.herokuapp.com/'
+    //baseURL: 'https://processos-api.herokuapp.com/'
+    baseURL: 'http://localhost:8080'
 })
 
 class ApiService {

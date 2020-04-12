@@ -14,11 +14,9 @@ class CadastroProcessos extends React.Component {
 
     state = {
         id: null,
-        descricao: '',
-        valor: '',
+        parecer: '',
         mes: '',
         ano: '',
-        tipo: '',
         status: '',
         usuario: null,
         atualizando: false
@@ -47,8 +45,8 @@ class CadastroProcessos extends React.Component {
     submit = () => {
         const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
 
-        const { descricao, valor, mes, ano, tipo } = this.state;
-        const processo = { descricao, valor, mes, ano, tipo, usuario: usuarioLogado.id };
+        const { parecer, mes, ano, } = this.state;
+        const processo = { parecer, mes, ano, usuario: usuarioLogado.id };
 
         try{
             this.service.validar(processo)
@@ -62,22 +60,22 @@ class CadastroProcessos extends React.Component {
             .salvar(processo)
             .then(response => {
                 this.props.history.push('/consulta-processos')
-                messages.mensagemSucesso('Lançamento cadastrado com sucesso!')
+                messages.mensagemSucesso('Processo cadastrado com sucesso!')
             }).catch(error => {
                 messages.mensagemErro(error.response.data)
             })
     }
 
     atualizar = () => {
-        const { descricao, valor, mes, ano, tipo, status, usuario, id } = this.state;
+        const { parecer, mes, ano, status, usuario, id } = this.state;
 
-        const processo = { descricao, valor, mes, ano, tipo, usuario, status, id };
+        const processo = { parecer, mes, ano, usuario, status, id };
         
         this.service
             .atualizar(processo)
             .then(response => {
                 this.props.history.push('/consulta-processos')
-                messages.mensagemSucesso('Lançamento atualizado com sucesso!')
+                messages.mensagemSucesso('Processo atualizado com sucesso!')
             }).catch(error => {
                 messages.mensagemErro(error.response.data)
             })
@@ -91,18 +89,17 @@ class CadastroProcessos extends React.Component {
     }
 
     render(){
-        const tipos = this.service.obterListaTipos();
         const meses = this.service.obterListaMeses();
 
         return (
-            <Card title={ this.state.atualizando ? 'Atualização de Lançamento'  : 'Cadastro de Lançamento' }>
+            <Card title={ this.state.atualizando ? 'Atualização de Processo'  : 'Cadastro de Processo' }>
                 <div className="row">
                     <div className="col-md-12">
-                        <FormGroup id="inputDescricao" label="Descrição: *" >
-                            <input id="inputDescricao" type="text" 
+                        <FormGroup id="inputParecer" label="Descrição: *" >
+                            <input id="inputParecer" type="text" 
                                    className="form-control" 
-                                   name="descricao"
-                                   value={this.state.descricao}
+                                   name="parecer"
+                                   value={this.state.parecer}
                                    onChange={this.handleChange}  />
                         </FormGroup>
                     </div>
@@ -130,29 +127,9 @@ class CadastroProcessos extends React.Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-4">
-                         <FormGroup id="inputValor" label="Valor: *">
-                            <input id="inputValor" 
-                                   type="text"
-                                   name="valor"
-                                   value={this.state.valor}
-                                   onChange={this.handleChange} 
-                                   className="form-control" />
-                        </FormGroup>
-                    </div>
+                    
 
-                    <div className="col-md-4">
-                         <FormGroup id="inputTipo" label="Tipo: *">
-                            <SelectMenu id="inputTipo" 
-                                        lista={tipos} 
-                                        name="tipo"
-                                        value={this.state.tipo}
-                                        onChange={this.handleChange}
-                                        className="form-control" />
-                        </FormGroup>
-                    </div>
-
-                    <div className="col-md-4">
+                    <div className="col-md-12">
                          <FormGroup id="inputStatus" label="Status: ">
                             <input type="text" 
                                    className="form-control" 
