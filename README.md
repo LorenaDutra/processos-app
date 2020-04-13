@@ -13,7 +13,6 @@ No diretório do projeto, executar:
 
 Executar o aplicativo no modo de desenvolvimento.<br>
 Abrir [http://localhost:3000](http://localhost:3000) <br>
-Aplicação na nuvem: https://processos-app.herokuapp.com/#/login
 
 
 ### `npm test`
