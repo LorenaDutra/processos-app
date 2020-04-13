@@ -1,8 +1,8 @@
 ## Tecnologias utilizadas
 
-Backend - Spring Boot
-FrontEnd - React JS
-Banco de dados - PostgreSQL
+Backend - Spring Boot <br>
+FrontEnd - React JS  <br>
+Banco de dados - PostgreSQL  <br>
 
 
 ## Scripts
